@@ -203,9 +203,13 @@ export default function AdminProducts() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-2 hover:bg-blue-50 text-blue-600 rounded-lg transition-colors" title="Edit">
+                      <Link 
+                        href={`/admin/products/edit/${product.id}`}
+                        className="p-2 hover:bg-blue-50 text-blue-600 rounded-lg transition-colors" 
+                        title="Edit"
+                      >
                         <HugeiconsIcon icon={PencilEdit01Icon} size={18} />
-                      </button>
+                      </Link>
                       <button 
                         onClick={() => handleDelete(product.id)}
                         className="p-2 hover:bg-red-50 text-red-600 rounded-lg transition-colors" 
