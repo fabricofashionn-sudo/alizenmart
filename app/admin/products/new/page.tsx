@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ImageAdd01Icon } from "@hugeicons/core-free-icons";
+import { supabase } from "@/lib/supabase";
+
 
 export default function AddProduct() {
   const router = useRouter();

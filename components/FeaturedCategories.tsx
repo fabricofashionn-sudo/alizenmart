@@ -5,6 +5,7 @@ import Link from "next/link";
 const categories = [
   {
     name: "Gadgets",
+    slug: "gadgets",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="5" y="15" width="30" height="20" rx="3" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
@@ -17,6 +18,7 @@ const categories = [
   },
   {
     name: "Smart Electronics",
+    slug: "smart-electronics",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M10 30V15L20 8L30 15V30H10Z" fill="#F1F8E9" stroke="#4CAF50" strokeWidth="2" />
@@ -28,6 +30,7 @@ const categories = [
   },
   {
     name: "Home & Lifestyle",
+    slug: "home-lifestyle",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="10" y="10" width="20" height="25" rx="2" fill="#F3E5F5" stroke="#9C27B0" strokeWidth="2" />
@@ -39,6 +42,7 @@ const categories = [
   },
   {
     name: "Beauty & Personal",
+    slug: "beauty-personal",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="12" y="10" width="16" height="25" rx="4" fill="#FFF3E0" stroke="#FF9800" strokeWidth="2" />
@@ -50,6 +54,7 @@ const categories = [
   },
   {
     name: "Healthy Food",
+    slug: "healthy-food",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M10 20C10 10 30 10 30 20V30C30 35 10 35 10 30V20Z" fill="#E8F5E9" stroke="#4CAF50" strokeWidth="2" />
@@ -61,6 +66,7 @@ const categories = [
   },
   {
     name: "Fashion",
+    slug: "fashion",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="8" y="8" width="24" height="24" rx="12" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
@@ -71,6 +77,7 @@ const categories = [
   },
   {
     name: "Mom & Baby",
+    slug: "mom-baby",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="20" cy="12" r="6" fill="#FCE4EC" stroke="#F06292" strokeWidth="2" />
@@ -81,6 +88,7 @@ const categories = [
   },
   {
     name: "Home & Kitchen",
+    slug: "home-kitchen",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M5 20L20 5L35 20V35H5V20Z" fill="#FFF3E0" stroke="#FF5722" strokeWidth="2" />
@@ -91,6 +99,7 @@ const categories = [
   },
   {
     name: "Appliances",
+    slug: "appliances",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="10" y="5" width="20" height="30" rx="2" fill="#ECEFF1" stroke="#607D8B" strokeWidth="2" />
@@ -102,6 +111,7 @@ const categories = [
   },
   {
     name: "Fitness & Health",
+    slug: "fitness-health",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20 35C20 35 5 25 5 15C5 10 10 5 15 5C18 5 20 8 20 8C20 8 22 5 25 5C30 5 35 10 35 15C35 25 20 35 20 35Z" fill="#FCE4EC" stroke="#F06292" strokeWidth="2" />
@@ -113,6 +123,7 @@ const categories = [
   },
   {
     name: "Smart Watch",
+    slug: "smart-watch",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="12" y="12" width="16" height="16" rx="4" fill="#333" />
@@ -124,6 +135,7 @@ const categories = [
   },
   {
     name: "Religious",
+    slug: "religious",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M10 35H30V20C30 15 25 10 20 10C15 10 10 15 10 20V35Z" fill="#FFF9C4" stroke="#FBC02D" strokeWidth="2" />
@@ -135,6 +147,7 @@ const categories = [
   },
   {
     name: "Peripherals",
+    slug: "peripherals",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="12" y="10" width="16" height="20" rx="8" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
@@ -145,6 +158,7 @@ const categories = [
   },
   {
     name: "Smart Furniture",
+    slug: "smart-furniture",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M10 10H30V15H10V10Z" fill="#FFF3E0" stroke="#FF9800" strokeWidth="2" />
@@ -155,6 +169,7 @@ const categories = [
   },
   {
     name: "Books",
+    slug: "books",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="10" y="28" width="20" height="5" fill="#4CAF50" stroke="#388E3C" strokeWidth="1" />
@@ -166,6 +181,7 @@ const categories = [
   },
   {
     name: "Others",
+    slug: "others",
     icon: (
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="8" y="8" width="8" height="8" rx="1" fill="#1E88E5" />
@@ -204,7 +220,7 @@ export default function FeaturedCategories() {
         {categories.map((category, index) => (
           <Link
             key={index}
-            href="/"
+            href={`/category/${category.slug}`}
             className="group flex flex-col items-center justify-center bg-white p-4 rounded-xl border border-gray-100 hover:border-primary/20 hover:shadow-md transition-all duration-300 aspect-square"
           >
             <div className="mb-3 transition-transform duration-300 group-hover:scale-110">

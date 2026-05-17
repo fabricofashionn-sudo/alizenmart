@@ -1,35 +1,136 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import BottomNav from "@/components/BottomNav";
+import { supabase } from "@/lib/supabase";
+import CategoryClient from "./CategoryClient";
+import type { Metadata } from "next";
 
-export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const categoryName = slug
+const slugToNameMap: Record<string, string> = {
+  "gadgets": "Gadgets",
+  "smart-electronics": "Smart Electronics",
+  "home-lifestyle": "Home & Lifestyle",
+  "beauty-personal": "Beauty & Personal",
+  "healthy-food": "Healthy Food",
+  "fashion": "Fashion",
+  "mom-baby": "Mom & Baby",
+  "home-kitchen": "Home & Kitchen",
+  "appliances": "Appliances",
+  "fitness-health": "Fitness & Health",
+  "smart-watch": "Smart Watch",
+  "religious": "Religious",
+  "peripherals": "Peripherals",
+  "smart-furniture": "Smart Furniture",
+  "books": "Books",
+  "others": "Others",
+};
+
+const getCategoryName = (slug: string) => {
+  if (slugToNameMap[slug]) return slugToNameMap[slug];
+  return slug
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+};
+
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+// Dynamic SEO metadata generator for Next.js 16 (using Promise parameters)
+export async function generateMetadata(
+  { params }: Props
+): Promise<Metadata> {
+  const { slug } = await params;
+  const decodedSlug = typeof slug === 'string' ? decodeURIComponent(slug) : "";
+  const categoryName = getCategoryName(decodedSlug);
+
+  return {
+    title: `${categoryName} - Buy Online at Best Price in Bangladesh`,
+    description: `Shop the latest ${categoryName} online at Alizenmart. Discover premium quality products, matching prices, and secure home delivery in Bangladesh.`,
+    alternates: {
+      canonical: `/category/${decodedSlug}`,
+    },
+    openGraph: {
+      title: `${categoryName} | Alizenmart`,
+      description: `Shop the latest ${categoryName} online at Alizenmart. Discover premium quality products in Bangladesh.`,
+      url: `https://alizenmart.com/category/${decodedSlug}`,
+    }
+  };
+}
+
+export default async function CategoryPage({ params }: Props) {
+  const { slug } = await params;
+  const decodedSlug = typeof slug === 'string' ? decodeURIComponent(slug) : "";
+  const categoryName = getCategoryName(decodedSlug);
+
+  let products: any[] = [];
+  try {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("category", categoryName)
+      .order("created_at", { ascending: false });
+
+    if (data && !error) {
+      products = data;
+    }
+  } catch (err) {
+    console.error("Failed to fetch products on server for category:", err);
+  }
+
+  // Schema Markup: ItemList and BreadcrumbList for categories
+  const sitemapUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://alizenmart.com";
+  
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${sitemapUrl}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Categories",
+        "item": `${sitemapUrl}/categories`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": categoryName,
+        "item": `${sitemapUrl}/category/${decodedSlug}`
+      }
+    ]
+  };
+
+  const itemListSchema = products.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "numberOfItems": products.length,
+    "itemListElement": products.slice(0, 10).map((product, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "name": product.title,
+      "url": `${sitemapUrl}/product-details/${encodeURIComponent(
+        product.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\u0980-\u09FF-]+/g, '').replace(/-+/g, '-').replace(/(^-|-$)+/g, '')
+      )}`
+    }))
+  } : null;
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#f4f4f4]">
-      <Header />
-      <main className="flex-1 py-6 md:py-10">
-        <div className="container-custom">
-          <div className="bg-white rounded-md p-6 shadow-sm border border-gray-100 min-h-[400px] flex flex-col items-center justify-center text-center">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">{categoryName}</h1>
-            <p className="text-gray-500 max-w-md">
-              Showing products for {categoryName}. In a real application, you would fetch and display the product list for this category here.
-            </p>
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full">
-                {/* Placeholder for products */}
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div key={i} className="aspect-square bg-gray-50 rounded animate-pulse"></div>
-                ))}
-            </div>
-          </div>
-        </div>
-      </main>
-      <Footer />
-      <BottomNav />
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {itemListSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+      )}
+      <CategoryClient categoryName={categoryName} initialProducts={products} />
+    </>
   );
 }
