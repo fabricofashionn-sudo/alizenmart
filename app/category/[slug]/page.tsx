@@ -44,14 +44,14 @@ export async function generateMetadata(
 
   return {
     title: `${categoryName} - Buy Online at Best Price in Bangladesh`,
-    description: `Shop the latest ${categoryName} online at Alizenmart. Discover premium quality products, matching prices, and secure home delivery in Bangladesh.`,
+    description: `Shop the latest ${categoryName} online at Fabrico Fashion. Discover premium quality clothing, fashion apparel, and accessories in Bangladesh.`,
     alternates: {
       canonical: `/category/${decodedSlug}`,
     },
     openGraph: {
-      title: `${categoryName} | Alizenmart`,
-      description: `Shop the latest ${categoryName} online at Alizenmart. Discover premium quality products in Bangladesh.`,
-      url: `https://alizenmart.com/category/${decodedSlug}`,
+      title: `${categoryName} | Fabrico Fashion`,
+      description: `Shop the latest ${categoryName} online at Fabrico Fashion. Discover premium quality clothing and lifestyle items in Bangladesh.`,
+      url: `https://fabricofashion.com/category/${decodedSlug}`,
     }
   };
 }
@@ -77,7 +77,7 @@ export default async function CategoryPage({ params }: Props) {
   }
 
   // Schema Markup: ItemList and BreadcrumbList for categories
-  const sitemapUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://alizenmart.com";
+  const sitemapUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fabricofashion.com";
   
   const breadcrumbSchema = {
     "@context": "https://schema.org",

@@ -57,7 +57,7 @@ async function getProductBySlug(slug: string) {
           category: matched.category || "General",
           tags: ["Featured Products", "Flash Sale"],
           unit: "Pieces",
-          description: matched.description || `Buy ${matched.title} online at Alizenmart. Discover premium quality products with fast delivery in Bangladesh.`,
+          description: matched.description || `Buy ${matched.title} online at Fabrico Fashion. Discover premium quality products with fast delivery in Bangladesh.`,
         };
       }
     }
@@ -77,7 +77,7 @@ async function getProductBySlug(slug: string) {
     category: matched.category,
     tags: ["Featured Products", "Flash Sale"],
     unit: "Pieces",
-    description: `Buy ${matched.title} online at Alizenmart. Discover premium quality products with fast delivery in Bangladesh.`,
+    description: `Buy ${matched.title} online at Fabrico Fashion. Discover premium quality clothing and apparel with fast delivery in Bangladesh.`,
   };
 }
 
@@ -88,16 +88,16 @@ export async function generateMetadata(
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://alizenmart.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fabricofashion.com";
 
   return {
-    title: `Buy ${product.title} - Price ৳${product.price} | Alizenmart`,
+    title: `Buy ${product.title} - Price ৳${product.price} | Fabrico Fashion`,
     description: product.description.substring(0, 155),
     alternates: {
       canonical: `/product-details/${slug}`,
     },
     openGraph: {
-      title: `${product.title} | Alizenmart`,
+      title: `${product.title} | Fabrico Fashion`,
       description: product.description.substring(0, 155),
       url: `${siteUrl}/product-details/${slug}`,
       type: "website",
@@ -112,7 +112,7 @@ export async function generateMetadata(
     },
     twitter: {
       card: "summary_large_image",
-      title: `${product.title} | Alizenmart`,
+      title: `${product.title} | Fabrico Fashion`,
       description: product.description.substring(0, 155),
       images: [product.images[0] || "/og-image.png"],
     }
@@ -123,7 +123,7 @@ export default async function ProductDetailsPage({ params }: Props) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://alizenmart.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fabricofashion.com";
 
   // Inject Product JSON-LD Schema
   const productSchema = {
@@ -132,10 +132,10 @@ export default async function ProductDetailsPage({ params }: Props) {
     "name": product.title,
     "image": product.images.map(img => img.startsWith('http') ? img : `${siteUrl}${img}`),
     "description": product.description,
-    "sku": `ALZ-${product.category.substring(0, 3).toUpperCase()}-${generateSlug(product.title).substring(0, 8).toUpperCase()}`,
+    "sku": `FF-${product.category.substring(0, 3).toUpperCase()}-${generateSlug(product.title).substring(0, 8).toUpperCase()}`,
     "brand": {
       "@type": "Brand",
-      "name": "Alizenmart"
+      "name": "Fabrico Fashion"
     },
     "offers": {
       "@type": "Offer",
@@ -147,7 +147,7 @@ export default async function ProductDetailsPage({ params }: Props) {
       "availability": "https://schema.org/InStock",
       "seller": {
         "@type": "Organization",
-        "name": "Alizenmart"
+        "name": "Fabrico Fashion"
       }
     }
   };

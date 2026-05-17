@@ -13,16 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://alizenmart.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://fabricofashion.com"),
   title: {
-    default: "Alizenmart - Best Online Shopping in Bangladesh",
-    template: "%s | Alizenmart",
+    default: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
+    template: "%s | Fabrico Fashion",
   },
-  description: "Explore Alizenmart for high-quality gadgets, smart electronics, home & lifestyle, beauty, fashion, and baby products with super-fast delivery and secure checkout in Bangladesh.",
-  keywords: ["e-commerce", "online shopping", "Bangladesh", "gadgets", "fashion", "lifestyle", "smart watch", "Alizenmart"],
-  authors: [{ name: "Alizenmart Team" }],
-  creator: "Alizenmart",
-  publisher: "Alizenmart",
+  description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
+  keywords: ["e-commerce", "online shopping", "Bangladesh", "fashion", "lifestyle", "panjabi", "premium clothing", "Fabrico Fashion"],
+  authors: [{ name: "Fabrico Fashion Team" }],
+  creator: "Fabrico Fashion",
+  publisher: "Fabrico Fashion",
   robots: {
     index: true,
     follow: true,
@@ -37,23 +37,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://alizenmart.com",
-    siteName: "Alizenmart",
-    title: "Alizenmart - Best Online Shopping in Bangladesh",
-    description: "Explore Alizenmart for high-quality gadgets, smart electronics, home & lifestyle, beauty, fashion, and baby products with super-fast delivery in Bangladesh.",
+    url: "https://fabricofashion.com",
+    siteName: "Fabrico Fashion",
+    title: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
+    description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items in Bangladesh.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Alizenmart - Premium Shopping Hub",
+        alt: "Fabrico Fashion - Premium Shopping Hub",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alizenmart - Best Online Shopping in Bangladesh",
-    description: "Explore Alizenmart for high-quality gadgets, smart electronics, home & lifestyle, beauty, fashion, and baby products.",
+    title: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
+    description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items.",
     images: ["/og-image.png"],
   },
   alternates: {

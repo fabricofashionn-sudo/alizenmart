@@ -3,8 +3,8 @@ import HomeClient from "./HomeClient";
 
 // Metadata for homepage
 export const metadata = {
-  title: "Alizenmart - Best Online Shopping in Bangladesh",
-  description: "Explore Alizenmart for high-quality gadgets, smart electronics, home & lifestyle, beauty, fashion, and baby products with super-fast delivery in Bangladesh.",
+  title: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
+  description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
 };
 
 export default async function Home() {
@@ -40,22 +40,22 @@ export default async function Home() {
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Alizenmart",
-      "url": "https://alizenmart.com",
+      "name": "Fabrico Fashion",
+      "url": "https://fabricofashion.com",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://alizenmart.com/categories?q={search_term_string}",
+        "target": "https://fabricofashion.com/categories?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     },
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Alizenmart",
-      "url": "https://alizenmart.com",
-      "logo": "https://alizenmart.com/favicon.ico",
+      "name": "Fabrico Fashion",
+      "url": "https://fabricofashion.com",
+      "logo": "https://fabricofashion.com/favicon.ico",
       "sameAs": [
-        "https://www.facebook.com/alizenmart"
+        "https://www.facebook.com/fabricofashion"
       ],
       "contactPoint": {
         "@type": "ContactPoint",

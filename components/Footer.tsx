@@ -14,7 +14,7 @@ const Footer = () => {
               <div className="relative h-10 w-36">
                 <Image 
                   src="/logo/logo2.png" 
-                  alt="Alizenmart Logo" 
+                  alt="Fabrico Fashion Logo" 
                   fill
                   sizes="144px"
                   className="object-contain object-left" 
@@ -22,7 +22,7 @@ const Footer = () => {
                 />
               </div>
               <p className="text-[#0c4063] text-xs md:text-sm leading-relaxed font-medium pr-2">
-                Alizen Mart is your trusted online shopping destination. We bring you quality products, smart deals, and reliable service all in one place. So Shop Smart, Live Easy
+                Fabrico Fashion is your trusted online shopping destination for premium apparel and accessories. We bring you high-quality products, smart fashion deals, and reliable service all in one place.
               </p>
               
               {/* Circular Social Icons */}
