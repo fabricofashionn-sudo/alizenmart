@@ -181,22 +181,6 @@ export default function RegisterPage() {
               </form>
             )}
 
-            {!success && (
-              <>
-                <div className="relative flex items-center justify-center">
-                  <div className="flex-grow border-t border-gray-100"></div>
-                  <span className="flex-shrink mx-4 text-gray-400 text-xs font-bold uppercase tracking-widest">OR SIGN UP WITH</span>
-                  <div className="flex-grow border-t border-gray-100"></div>
-                </div>
-
-                <div className="flex flex-col gap-4">
-                  <button className="flex items-center justify-center gap-2 py-3.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors shadow-sm">
-                    <Image src="/google_icon.svg" alt="Google" width={22} height={22} />
-                    <span className="text-sm font-bold text-gray-700">Sign up with Google</span>
-                  </button>
-                </div>
-              </>
-            )}
 
             <div className="text-center pt-2">
               <p className="text-sm text-gray-500">

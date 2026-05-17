@@ -114,7 +114,7 @@ const Header = () => {
             <Link href="/" className="flex-shrink-0 md:flex-none absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:translate-x-0">
               <div className="relative h-8 md:h-10 w-32 md:w-40 flex items-center">
                 <Image 
-                  src="/logo/logo2.png" 
+                  src="/logo/logo1.png" 
                   alt="Fabrico Fashion Logo" 
                   fill
                   sizes="(max-width: 768px) 128px, 160px"

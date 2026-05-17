@@ -14,7 +14,6 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -34,23 +33,6 @@ export default function LoginPage() {
       setLoading(false);
     } else {
       router.push("/account");
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    setGoogleLoading(true);
-    setError(null);
-    
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/account`,
-      },
-    });
-
-    if (error) {
-      setError(error.message);
-      setGoogleLoading(false);
     }
   };
 
@@ -149,29 +131,6 @@ export default function LoginPage() {
                 {loading ? "LOGGING IN..." : "LOGIN"}
               </button>
             </form>
-
-            <div className="relative flex items-center justify-center">
-              <div className="flex-grow border-t border-gray-100"></div>
-              <span className="flex-shrink mx-4 text-gray-400 text-xs font-bold uppercase tracking-widest">OR LOGIN WITH</span>
-              <div className="flex-grow border-t border-gray-100"></div>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <button 
-                onClick={handleGoogleLogin}
-                disabled={googleLoading}
-                className="flex items-center justify-center gap-2 py-3.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                {googleLoading ? (
-                  <div className="w-5 h-5 border-2 border-gray-300 border-t-[#1a80c2] rounded-full animate-spin"></div>
-                ) : (
-                  <Image src="/google_icon.svg" alt="Google" width={22} height={22} />
-                )}
-                <span className="text-sm font-bold text-gray-700">
-                  {googleLoading ? "Connecting..." : "Continue with Google"}
-                </span>
-              </button>
-            </div>
 
             <div className="text-center pt-2">
               <p className="text-sm text-gray-500">
