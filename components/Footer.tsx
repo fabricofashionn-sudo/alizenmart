@@ -28,7 +28,7 @@ const Footer = () => {
               {/* Circular Social Icons */}
               <div className="flex gap-2.5 pt-2">
                 <Link 
-                  href="https://facebook.com" 
+                  href="https://www.facebook.com/fabricofashions" 
                   target="_blank"
                   className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-[#FF5722] hover:scale-105 active:scale-95 transition-all shadow-sm"
                   title="Facebook"
@@ -48,10 +48,10 @@ const Footer = () => {
                   </svg>
                 </Link>
                 <Link 
-                  href="https://m.me/fabricofashion" 
+                  href="https://m.me/fabricofashions" 
                   target="_blank"
                   className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-[#FF5722] hover:scale-105 active:scale-95 transition-all shadow-sm"
-                  title="Messenger (Fabrico Fashion)"
+                  title="Messenger (Fabrico Fashions)"
                 >
                   <svg className="w-5 h-5 text-[#FF5722] hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.477 2 2 6.145 2 11.243a9.096 9.096 0 0 0 3.256 6.945V22l3.664-2.023A10.747 10.747 0 0 0 12 20.486c5.523 0 10-4.146 10-9.243S17.523 2 12 2zm1.096 11.968l-2.584-2.756-5.048 2.756 5.548-5.892 2.628 2.756 5.004-2.756-5.548 5.892z"/>
