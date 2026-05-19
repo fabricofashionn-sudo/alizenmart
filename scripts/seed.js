@@ -1,4 +1,14 @@
 const { createClient } = require('@supabase/supabase-js');
+const path = require('path');
+
+// Automatically load environment variables from .env.local in Node.js 20.6.0+
+if (typeof process.loadEnvFile === 'function') {
+    try {
+        process.loadEnvFile(path.resolve(__dirname, '../.env.local'));
+    } catch (error) {
+        console.warn('Could not load .env.local file automatically:', error.message);
+    }
+}
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
