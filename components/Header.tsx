@@ -58,8 +58,8 @@ const Header = () => {
         }`}
       >
         {/* Drawer Header */}
-        <div className="bg-[#1a80c2] p-4 flex items-center justify-between">
-          <button onClick={() => setIsDrawerOpen(false)} className="text-white">
+        <div className="bg-white border-b border-gray-100 p-4 flex items-center justify-between">
+          <button onClick={() => setIsDrawerOpen(false)} className="text-[#0B5A70] hover:text-[#FF5722] transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
@@ -67,7 +67,7 @@ const Header = () => {
           <Link href="/" className="flex items-center" onClick={() => setIsDrawerOpen(false)}>
             <div className="relative h-8 w-28">
               <Image 
-                src="/logo/logo2.png" 
+                src="/logo/logo1.png" 
                 alt="Fabrico Fashion Logo" 
                 fill
                 sizes="112px"
@@ -107,12 +107,12 @@ const Header = () => {
       </div>
 
       {/* Main Header Bar */}
-      <div className="bg-[#1a80c2] py-2 md:py-3 shadow-sm">
+      <div className="bg-white border-b border-gray-100 py-2 md:py-3 shadow-sm transition-all duration-300">
         <div className="container-custom flex flex-col gap-3 md:gap-4">
           <div className="flex items-center justify-between gap-4">
             {/* Mobile Menu Icon */}
             <button 
-              className="md:hidden text-white"
+              className="md:hidden text-[#0B5A70] hover:text-[#FF5722] transition-colors"
               onClick={() => setIsDrawerOpen(true)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
@@ -124,7 +124,7 @@ const Header = () => {
             <Link href="/" className="flex-shrink-0 md:flex-none absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:translate-x-0">
               <div className="relative h-8 md:h-10 w-32 md:w-40 flex items-center">
                 <Image 
-                  src="/logo/logo2.png" 
+                  src="/logo/logo1.png" 
                   alt="Fabrico Fashion Logo" 
                   fill
                   sizes="(max-width: 768px) 128px, 160px"
@@ -141,9 +141,9 @@ const Header = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search product, brand, and more..."
-                className="w-full bg-white px-4 py-2 rounded-sm outline-none text-sm pr-12"
+                className="w-full bg-gray-50 border border-[#0B5A70] px-4 py-2 rounded-sm outline-none text-sm pr-12 text-gray-800 placeholder-gray-400 focus:bg-white transition-colors"
               />
-              <button type="submit" className="absolute right-0 top-0 bottom-0 px-4 bg-[#FF5722] text-white rounded-r-sm flex items-center justify-center">
+              <button type="submit" className="absolute right-0 top-0 bottom-0 px-4 bg-[#FF5722] hover:bg-[#e64a19] text-white rounded-r-sm flex items-center justify-center transition-colors">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -162,23 +162,23 @@ const Header = () => {
             </form>
 
             {/* Action Icons */}
-            <div className="flex items-center gap-3 md:gap-5 text-white">
-              <Link href="/track-order" className="hidden lg:flex items-center gap-1.5 hover:opacity-80 transition-opacity text-[13px] font-semibold">
+            <div className="flex items-center gap-3 md:gap-5 text-[#0B5A70]">
+              <Link href="/track-order" className="hidden lg:flex items-center gap-1.5 hover:text-[#FF5722] transition-colors duration-200 text-[13px] font-semibold">
                  <HugeiconsIcon icon={TruckDeliveryIcon} size={20} color="currentColor" strokeWidth={2} />
                  <span>Track Order</span>
               </Link>
               
-              <Link href="/checkout" className="relative flex items-center justify-center p-1 hover:opacity-80 transition-opacity">
+              <Link href="/checkout" className="relative flex items-center justify-center p-1 hover:text-[#FF5722] transition-colors duration-200">
                 <div className="relative">
                   <HugeiconsIcon icon={ShoppingCart01Icon} size={24} color="currentColor" strokeWidth={2} />
-                  <span className="absolute -top-1.5 -right-1.5 bg-[#FF5722] text-white text-[10px] w-4.5 h-4.5 rounded-full flex items-center justify-center font-bold border-2 border-[#1a80c2]">
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#FF5722] text-white text-[10px] w-4.5 h-4.5 rounded-full flex items-center justify-center font-bold border-2 border-white">
                     {totalItems}
                   </span>
                 </div>
                 <span className="hidden md:inline ml-2 text-[13px] font-semibold">Cart({totalItems})</span>
               </Link>
 
-              <Link href="/account" className="hidden md:flex items-center gap-1.5 hover:opacity-80 transition-opacity text-[13px] font-semibold">
+              <Link href="/account" className="hidden md:flex items-center gap-1.5 hover:text-[#FF5722] transition-colors duration-200 text-[13px] font-semibold">
                 <HugeiconsIcon icon={UserIcon} size={20} color="currentColor" strokeWidth={2} />
                 <span>Account</span>
               </Link>
@@ -192,9 +192,9 @@ const Header = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search product, brand, and more..."
-              className="w-full bg-white px-4 py-2.5 rounded-sm outline-none text-sm pr-12 shadow-sm"
+              className="w-full bg-gray-50 border border-[#0B5A70] px-4 py-2.5 rounded-sm outline-none text-sm pr-12 text-gray-800 placeholder-gray-400 focus:bg-white transition-colors shadow-sm"
             />
-            <button type="submit" className="absolute right-0 top-0 bottom-0 px-4 bg-[#FF5722] text-white rounded-r-sm flex items-center justify-center">
+            <button type="submit" className="absolute right-0 top-0 bottom-0 px-4 bg-[#FF5722] hover:bg-[#e64a19] text-white rounded-r-sm flex items-center justify-center transition-colors">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
