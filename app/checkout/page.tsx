@@ -30,6 +30,13 @@ export default function CheckoutPage() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState("");
 
+  // Error Modal state
+  const [errorModal, setErrorModal] = useState({ show: false, message: "", title: "সতর্কতা" });
+
+  const showError = (message: string, title: string = "সতর্কতা") => {
+    setErrorModal({ show: true, message, title });
+  };
+
   // Prefill user details if logged in
   useEffect(() => {
     const getUserData = async () => {
@@ -50,18 +57,29 @@ export default function CheckoutPage() {
 
   const handlePlaceOrder = async () => {
     if (cart.length === 0) {
-      alert("আপনার কার্টটি খালি! অনুগ্রহ করে অর্ডার করার জন্য প্রডাক্ট যোগ করুন।");
+      showError("আপনার কার্টটি খালি! অনুগ্রহ করে অর্ডার করার জন্য প্রডাক্ট যোগ করুন।");
       return;
     }
 
     if (!fullName.trim() || !phone.trim() || !address.trim()) {
-      alert("অনুগ্রহ করে আপনার নাম, মোবাইল নম্বর এবং সম্পূর্ণ ঠিকানা পূরণ করুন।");
+      showError("অনুগ্রহ করে আপনার নাম, মোবাইল নম্বর এবং সম্পূর্ণ ঠিকানা পূরণ করুন।");
+      return;
+    }
+
+    // Clean all non-digit characters
+    let cleanedPhone = phone.replace(/\D/g, "");
+    if (cleanedPhone.length === 13 && cleanedPhone.startsWith("88")) {
+      cleanedPhone = cleanedPhone.substring(2);
+    }
+
+    if (cleanedPhone.length !== 11 || !cleanedPhone.startsWith("01")) {
+      showError("মোবাইল নম্বরটি অবশ্যই ১১ ডিজিটের হতে হবে (যেমন: 01XXXXXXXXX)।");
       return;
     }
 
     if (paymentMethod === "bkash") {
       if (!bkashNumber.trim() || !transactionId.trim()) {
-        alert("বিকাশ পেমেন্টের জন্য অনুগ্রহ করে বিকাশ নম্বর এবং ট্রানজেকশন আইডি প্রদান করুন।");
+        showError("বিকাশ পেমেন্টের জন্য অনুগ্রহ করে বিকাশ নম্বর এবং ট্রানজেকশন আইডি প্রদান করুন।");
         return;
       }
     }
@@ -69,19 +87,13 @@ export default function CheckoutPage() {
     setIsSubmitting(true);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-
-      if (!user) {
-        alert("অর্ডার নিশ্চিত করতে অনুগ্রহ করে প্রথমে লগইন করুন।");
-        router.push("/login?redirect=/checkout");
-        return;
-      }
+      const { data: { user } } = await supabase.auth.getUser().catch(() => ({ data: { user: null } }));
 
       // Prepare order details for database insert
       const orderPayload = {
-        user_id: user.id,
+        user_id: user?.id || null,
         customer_name: fullName,
-        phone: phone,
+        phone: cleanedPhone,
         address: address,
         total: total,            // Matches admin panel 'total'
         total_amount: total,     // Matches user dashboard 'total_amount'
@@ -122,7 +134,7 @@ export default function CheckoutPage() {
       clearCart();
     } catch (error: any) {
       console.error("Order placement failed:", error);
-      alert(`অর্ডার করতে সমস্যা হয়েছে: ${error.message || "Unknown error"}`);
+      showError(`অর্ডার করতে সমস্যা হয়েছে: ${error.message || "Unknown error"}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -486,6 +498,32 @@ export default function CheckoutPage() {
                 কেনাকাটা চালিয়ে যান
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Premium Minimalist Custom Alert Modal */}
+      {errorModal.show && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-white rounded-xl p-6 max-w-sm w-full text-center border border-gray-200 relative transform scale-100 transition-all duration-300">
+            {/* Minimalist Error Icon */}
+            <div className="text-red-550 mb-3 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+              </svg>
+            </div>
+
+            <h3 className="text-base font-bold text-gray-900 mb-1.5">{errorModal.title}</h3>
+            <p className="text-xs text-gray-500 leading-relaxed mb-5">
+              {errorModal.message}
+            </p>
+
+            <button
+              onClick={() => setErrorModal({ ...errorModal, show: false })}
+              className="w-full bg-[#FF5722] hover:bg-[#E64A19] text-white py-2.5 rounded-lg font-bold text-xs transition-colors active:scale-[0.98]"
+            >
+              ঠিক আছে
+            </button>
           </div>
         </div>
       )}

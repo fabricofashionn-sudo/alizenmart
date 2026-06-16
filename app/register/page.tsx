@@ -26,13 +26,25 @@ export default function RegisterPage() {
     setLoading(true);
     setError(null);
 
+    // Clean all non-digit characters
+    let cleanedPhone = mobile.replace(/\D/g, "");
+    if (cleanedPhone.length === 13 && cleanedPhone.startsWith("88")) {
+      cleanedPhone = cleanedPhone.substring(2);
+    }
+
+    if (cleanedPhone.length !== 11 || !cleanedPhone.startsWith("01")) {
+      setError("মোবাইল নম্বরটি অবশ্যই ১১ ডিজিটের হতে হবে (যেমন: 01XXXXXXXXX)।");
+      setLoading(false);
+      return;
+    }
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
           full_name: fullName,
-          mobile_number: mobile,
+          mobile_number: cleanedPhone,
         },
       },
     });

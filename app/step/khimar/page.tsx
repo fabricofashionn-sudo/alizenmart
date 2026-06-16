@@ -69,6 +69,13 @@ export default function ShirtLandingPage() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState("");
 
+  // Error Modal State
+  const [errorModal, setErrorModal] = useState({ show: false, message: "", title: "সতর্কতা" });
+
+  const showError = (message: string, title: string = "সতর্কতা") => {
+    setErrorModal({ show: true, message, title });
+  };
+
   // Refs for smooth scroll target
   const orderFormRef = useRef<HTMLDivElement>(null);
 
@@ -113,13 +120,24 @@ export default function ShirtLandingPage() {
     e.preventDefault();
 
     if (!fullName.trim() || !phone.trim() || !address.trim()) {
-      alert("অনুগ্রহ করে আপনার নাম, মোবাইল নম্বর এবং সম্পূর্ণ ঠিকানা পূরণ করুন।");
+      showError("অনুগ্রহ করে আপনার নাম, মোবাইল নম্বর এবং সম্পূর্ণ ঠিকানা পূরণ করুন।");
+      return;
+    }
+
+    // Clean all non-digit characters
+    let cleanedPhone = phone.replace(/\D/g, "");
+    if (cleanedPhone.length === 13 && cleanedPhone.startsWith("88")) {
+      cleanedPhone = cleanedPhone.substring(2);
+    }
+
+    if (cleanedPhone.length !== 11 || !cleanedPhone.startsWith("01")) {
+      showError("মোবাইল নম্বরটি অবশ্যই ১১ ডিজিটের হতে হবে (যেমন: 01XXXXXXXXX)।");
       return;
     }
 
     if (paymentMethod !== "cod") {
       if (!bkashNumber.trim() || !transactionId.trim()) {
-        alert("পেমেন্ট ভেরিফাই করার জন্য অনুগ্রহ করে আপনার পেমেন্ট নম্বর এবং ট্রানজেকশন আইডি প্রদান করুন।");
+        showError("পেমেন্ট ভেরিফাই করার জন্য অনুগ্রহ করে আপনার পেমেন্ট নম্বর এবং ট্রানজেকশন আইডি প্রদান করুন।");
         return;
       }
     }
@@ -133,7 +151,7 @@ export default function ShirtLandingPage() {
       const orderPayload = {
         user_id: user?.id || null,
         customer_name: fullName,
-        phone: phone,
+        phone: cleanedPhone,
         address: address,
         total: total,
         total_amount: total,
@@ -206,7 +224,7 @@ export default function ShirtLandingPage() {
 
     } catch (err: any) {
       console.error("Critical order placement failure:", err);
-      alert(`অর্ডার করতে সমস্যা হয়েছে: ${err.message || "Unknown error"}`);
+      showError(`অর্ডার করতে সমস্যা হয়েছে: ${err.message || "Unknown error"}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -1125,6 +1143,32 @@ export default function ShirtLandingPage() {
                 ক্লোজ করুন
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Premium Minimalist Custom Alert Modal (Dark Theme) */}
+      {errorModal.show && (
+        <div className="fixed inset-0 bg-slate-950/60 z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-slate-900 rounded-xl p-6 max-w-sm w-full text-center border border-slate-800 relative transform scale-100 transition-all duration-300">
+            {/* Minimalist Warning Icon */}
+            <div className="text-amber-400 mb-3 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+              </svg>
+            </div>
+
+            <h3 className="text-base font-bold text-white mb-1.5">{errorModal.title}</h3>
+            <p className="text-xs text-slate-400 leading-relaxed mb-5">
+              {errorModal.message}
+            </p>
+
+            <button
+              onClick={() => setErrorModal({ ...errorModal, show: false })}
+              className="w-full bg-amber-400 hover:bg-amber-500 text-slate-950 py-2.5 rounded-lg font-bold text-xs transition-colors active:scale-[0.98]"
+            >
+              ঠিক আছে
+            </button>
           </div>
         </div>
       )}
